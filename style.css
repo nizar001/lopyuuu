@@ -1,0 +1,157 @@
+:root{--ease:cubic-bezier(.22,1,.36,1);--gold:#f3dfb0;--rose:#ff9fb8;--ink:#fff4f0}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:#050308;overflow:hidden;font-family:Quicksand,system-ui,sans-serif;color:var(--ink);-webkit-tap-highlight-color:transparent}
+body{display:grid;place-items:center}
+h1,h2,h3,p{margin:0}
+em{font-style:normal}
+
+/* Panggung 16:9 (ukuran layar HP, tapi landscape) */
+.stage{position:relative;width:min(100vw,calc(100vh*16/9));width:min(100vw,calc(100dvh*16/9));aspect-ratio:16/9;container-type:inline-size;overflow:hidden;background:radial-gradient(120% 90% at 15% 0,#43194f 0,#1b0b26 55%,#07040b 100%)}
+.stage::after{content:"";position:absolute;inset:0;z-index:4;pointer-events:none;box-shadow:inset 0 0 12cqw #000}
+.gold{background:linear-gradient(90deg,#fbeec6,#e0a45e 50%,#fbeec6);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* Layar */
+.scr{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;gap:5cqw;padding:5cqw 7cqw 10cqw;opacity:0;visibility:hidden;transform:translate3d(3cqw,0,0) scale(.97);filter:blur(.8cqw);will-change:transform,opacity;transition:opacity .7s var(--ease),transform .9s var(--ease),filter .7s,visibility 0s .7s}
+.scr.on{opacity:1;visibility:visible;transform:none;filter:none;transition:opacity .8s .15s var(--ease),transform 1s .15s var(--ease),filter .8s .15s}
+#s0,.final,.video,.wa{flex-direction:column;text-align:center;gap:1.2cqw}
+.flip{flex-direction:row-reverse}
+#fx{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.fl{position:absolute;bottom:-5%;opacity:0;animation:up linear forwards}
+@keyframes up{10%{opacity:.85}to{opacity:0;transform:translateY(-62cqw) rotate(35deg)}}
+
+/* Layar awal */
+.date{font:italic 500 2.6cqw 'Cormorant Garamond',serif;color:var(--rose);letter-spacing:.12em}
+#s0 h1{font:italic 700 8cqw/1 'Cormorant Garamond',serif;padding:0 1cqw .6cqw}
+.sub{font-size:1.9cqw;opacity:.85}
+#fm{display:flex;flex-direction:column;align-items:center;gap:1.1cqw;margin-top:1.2cqw}
+input{width:34cqw;padding:1.1cqw 2cqw;border-radius:99cqw;border:1px solid #f3dfb066;background:#ffffff14;color:#fff;font:500 1.9cqw Quicksand,sans-serif;text-align:center;outline:0}
+input::placeholder{color:#fff9}
+input:focus{border-color:var(--gold);box-shadow:0 0 2cqw #f3dfb033}
+.btn{font:700 1.7cqw Quicksand,sans-serif;color:#2a1a05;background:linear-gradient(135deg,#fbeec6,#d9a85a);border:0;border-radius:99cqw;padding:1.1cqw 3.2cqw;cursor:pointer;box-shadow:0 .6cqw 2cqw #e8c98744;transition:transform .2s}
+.btn:active{transform:scale(.94)}
+.btn.ghost{background:#ffffff14;color:var(--gold);border:1px solid #f3dfb066;box-shadow:none}
+.btn:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* Halaman foto + pesan */
+.frame{margin:0;position:relative;height:100%;aspect-ratio:4/5;padding:1cqw;overflow:hidden;border-radius:1.4cqw;border:.4cqw solid transparent;background:linear-gradient(#1a1222,#1a1222) padding-box,linear-gradient(135deg,#fbeec6,#b88a44 50%,#fbeec6) border-box;box-shadow:0 2cqw 5cqw #000a,0 0 4cqw #f3dfb02e;transform:rotate(-2.5deg)}
+.flip .frame{transform:rotate(2.5deg)}
+.frame img{display:block;width:100%;height:100%;object-fit:cover;border-radius:.8cqw;animation:kb 14s ease-in-out infinite alternate}
+@keyframes kb{to{transform:scale(1.08)}}
+.frame::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 40%,#fff3 50%,transparent 60%);transform:translateX(-100%);animation:sh 6s 1s infinite}
+@keyframes sh{to{transform:translateX(100%)}}
+.nf{display:none;place-items:center;height:100%;font-size:10cqw;border-radius:.8cqw;background:linear-gradient(135deg,#3b1646,#7a2a55)}
+.frame.noimg img{display:none}
+.frame.noimg .nf{display:grid}
+.card{flex:1;max-width:46cqw;padding:2.8cqw 3.4cqw;border-radius:2cqw;background:#ffffff0f;backdrop-filter:blur(1.2cqw);-webkit-backdrop-filter:blur(1.2cqw);border:1px solid #f3dfb055;box-shadow:0 2cqw 5cqw #0008}
+.card small{font:italic 500 1.9cqw 'Cormorant Garamond',serif;color:var(--rose)}
+.card h2{font:italic 700 4.4cqw/1.1 'Cormorant Garamond',serif;margin:.6cqw 0 1.4cqw;padding-bottom:.4cqw}
+.card{max-height:100%;display:flex;flex-direction:column}
+.card p{font:500 1.8cqw/1.6 Quicksand,sans-serif;min-height:12cqw;overflow-y:auto;scrollbar-width:none}
+
+/* Halaman akhir */
+.final{gap:.9cqw;padding-top:3cqw}
+.seal{font-size:3.8cqw;animation:bob 1s ease-in-out infinite alternate}
+.final small{font:italic 500 2cqw 'Cormorant Garamond',serif;color:var(--rose)}
+.final h1{font:italic 700 5cqw/1.1 'Cormorant Garamond',serif;padding-bottom:.5cqw}
+.fmsg{font:500 1.7cqw/1.55 Quicksand,sans-serif;max-width:64cqw;min-height:8cqw;max-height:14cqw;overflow-y:auto;scrollbar-width:none}
+.react{display:flex;gap:1.4cqw}
+.rtxt{font:italic 500 2.5cqw 'Cormorant Garamond',serif;color:#ffc2d1;min-height:3cqw}
+
+/* Halaman video */
+.video h2{font:italic 700 3.4cqw 'Cormorant Garamond',serif;padding-bottom:.4cqw}
+.video video{width:34cqw;aspect-ratio:16/9;background:#000;border-radius:1.4cqw;border:.3cqw solid #f3dfb099;box-shadow:0 2cqw 5cqw #000a}
+.vmsg{font:500 1.6cqw/1.55 Quicksand,sans-serif;max-width:62cqw;max-height:11cqw;overflow-y:auto;scrollbar-width:none}
+
+/* Navigasi */
+#nav{position:absolute;left:0;right:0;bottom:1.6cqw;z-index:6;display:none;align-items:center;justify-content:center;gap:2.5cqw}
+#nav.on{display:flex}
+#dots i{display:inline-block;width:.9cqw;height:.9cqw;margin:0 .35cqw;border-radius:50%;background:#fff3;transition:.3s}
+#dots i.on{background:var(--gold);transform:scale(1.5)}
+
+/* Animasi hewan */
+#pets{position:absolute;inset:0;z-index:8;pointer-events:none}
+.pet{position:absolute;left:0;bottom:6%;font-size:15cqw;animation:go 4.2s linear forwards}
+@keyframes go{from{transform:translateX(-20cqw)}to{transform:translateX(105cqw)}}
+.pet span{display:inline-block;animation:bob .35s ease-in-out infinite alternate}
+@keyframes bob{to{transform:translateY(-2cqw) rotate(6deg)}}
+.hop span{animation-name:hop;animation-duration:.55s}
+@keyframes hop{to{transform:translateY(-12cqw)}}
+.fly{bottom:48%}
+.fly span{animation-name:fl;animation-duration:.6s}
+@keyframes fl{to{transform:translateY(-4cqw) scale(1.1) rotate(-8deg)}}
+.swim{bottom:30%}
+.swim span{animation-name:sw;animation-duration:.8s}
+@keyframes sw{from{transform:rotate(-8deg)}to{transform:rotate(8deg) translateY(-1.5cqw)}}
+.bubble{position:absolute;left:50%;top:14%;max-width:80cqw;text-align:center;padding:1.2cqw 3cqw;border-radius:3cqw;background:#fff;color:#3b1646;font:700 2.4cqw Quicksand,sans-serif;box-shadow:0 1cqw 4cqw #0007;animation:pop .5s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes pop{from{transform:translateX(-50%) scale(0)}to{transform:translateX(-50%) scale(1)}}
+
+/* Notif & perpisahan */
+#modal,#bye{position:absolute;inset:0;z-index:20;display:none;place-items:center;background:#000b;backdrop-filter:blur(1cqw);-webkit-backdrop-filter:blur(1cqw)}
+#modal.on{display:grid}
+#bye.on{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.6cqw;text-align:center}
+#bye h2{font:italic 700 6cqw 'Cormorant Garamond',serif;padding-bottom:.5cqw}
+#bye p{font-size:2.1cqw}
+.box{display:flex;flex-direction:column;align-items:center;gap:1.4cqw;max-width:58cqw;padding:3cqw 4cqw;text-align:center;border-radius:2cqw;background:#24112f;border:1px solid #f3dfb099;box-shadow:0 3cqw 8cqw #000;animation:pop2 .4s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pop2{from{transform:scale(.6);opacity:0}}
+.box small{font:700 1.5cqw Quicksand,sans-serif;color:var(--rose)}
+.box h3{font:italic 700 3.4cqw/1.2 'Cormorant Garamond',serif}
+.box .row{display:flex;gap:1.6cqw;margin-top:.6cqw}
+.box em{font-size:1.3cqw;opacity:.6}
+
+/* Peringatan landscape */
+#rotate{position:fixed;inset:0;z-index:99;display:none;flex-direction:column;align-items:center;justify-content:center;gap:4vmin;padding:8vmin;text-align:center;background:radial-gradient(circle at 50% 30%,#43194f,#07040b)}
+#rotate.on{display:flex}
+#rotate i{position:relative;width:14vmin;height:24vmin;border:1vmin solid var(--gold);border-radius:3vmin;animation:rot 2.6s ease-in-out infinite}
+#rotate i::after{content:"💖";position:absolute;inset:0;display:grid;place-items:center;font-size:6vmin;font-style:normal}
+@keyframes rot{0%,20%{transform:rotate(0)}60%,100%{transform:rotate(-90deg)}}
+#rotate h2{font:italic 700 7vmin/1.15 'Cormorant Garamond',serif;color:var(--gold)}
+#rotate p{font-size:3.6vmin;line-height:1.6;opacity:.85}
+
+@media (prefers-reduced-motion:reduce){.fl,.frame::after,.frame img,.seal{animation:none}}
+
+/* Surat panjang (halaman 4) */
+.letter{align-items:stretch;padding:3cqw 8cqw 9cqw}
+.letter .sc{position:relative;width:100%;height:100%;overflow-y:auto;scrollbar-width:none;padding:6cqw 2cqw 14cqw;text-align:center;-webkit-mask-image:linear-gradient(transparent,#000 10%,#000 88%,transparent);mask-image:linear-gradient(transparent,#000 10%,#000 88%,transparent)}
+.letter .sc::-webkit-scrollbar{display:none}
+.letter h2{font:italic 700 4cqw 'Cormorant Garamond',serif;margin-bottom:3cqw;padding-bottom:.5cqw}
+.letter p{font:500 2.1cqw/1.85 Quicksand,sans-serif;margin:0 auto 3cqw;max-width:70cqw;opacity:0;transform:translateY(3cqw) scale(.98);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}
+.letter p.show{opacity:1;transform:none}
+.letter p.big{font:italic 700 6cqw/1.2 'Cormorant Garamond',serif;padding-bottom:.6cqw}
+
+/* Halaman pesan WhatsApp */
+.wa{gap:1.2cqw}
+.wa h2{font:italic 700 4.6cqw/1.1 'Cormorant Garamond',serif;padding-bottom:.5cqw}
+.wa .vmsg{max-height:12cqw}
+textarea{width:56cqw;height:10cqw;resize:none;padding:1.3cqw 2cqw;border-radius:2cqw;border:1px solid #f3dfb066;background:#ffffff14;color:#fff;font:500 1.7cqw/1.5 Quicksand,sans-serif;outline:0}
+textarea::placeholder{color:#fff9}
+textarea:focus{border-color:var(--gold);box-shadow:0 0 2cqw #f3dfb033}
+.btn.wag{background:linear-gradient(135deg,#b6f5c8,#3fcf74);box-shadow:0 .6cqw 2cqw #3fcf7455}
+
+/* Si hewan pendamping */
+#buddy{position:absolute;z-index:6;left:2cqw;bottom:1.2cqw;display:none;flex-direction:column-reverse;align-items:flex-start;gap:.4cqw}
+#buddy.on{display:flex}
+#bem{display:inline-block;font-size:4cqw;animation:bob .5s ease-in-out infinite alternate}
+#bq{font:700 1.4cqw Quicksand,sans-serif;color:#3b1646;background:#fff;padding:.7cqw 1.5cqw;border-radius:2cqw 2cqw 2cqw .4cqw;box-shadow:0 .6cqw 2cqw #0006;transform-origin:0 100%;animation:pop3 .7s var(--ease) both}
+@keyframes pop3{from{transform:scale(0);opacity:0}}
+
+/* Gerakan lebih halus */
+.btn{transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .3s}
+.btn:hover{transform:translateY(-.3cqw) scale(1.06)}
+#next{animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.07);box-shadow:0 .6cqw 3cqw #f3dfb099}}
+.scr.on>*{animation:rise 1s var(--ease) backwards}
+.scr.on>:nth-child(2){animation-delay:.12s}.scr.on>:nth-child(3){animation-delay:.24s}.scr.on>:nth-child(4){animation-delay:.36s}.scr.on>:nth-child(n+5){animation-delay:.48s}
+@keyframes rise{from{opacity:0;transform:translate3d(0,3cqw,0) scale(.95)}}
+.scr.on>.seal{animation:rise 1s var(--ease) backwards,bob 1s ease-in-out 1s infinite alternate}
+.scr.on>.card{animation:rise 1s var(--ease) .15s backwards,cardf 6s ease-in-out 1.2s infinite alternate}
+.scr.on>.frame{animation:rise 1s var(--ease) backwards,fr 7s ease-in-out 1.1s infinite alternate}
+.scr.flip.on>.frame{animation-name:rise,fr2}
+@keyframes fr{from{transform:rotate(-2.5deg)}to{transform:rotate(-1deg) translateY(-1cqw)}}
+@keyframes fr2{from{transform:rotate(2.5deg)}to{transform:rotate(1deg) translateY(-1cqw)}}
+@keyframes cardf{to{transform:translateY(-.8cqw)}}
+.fl{will-change:transform,opacity}
+
+/* Gerbang landscape: langsung terkunci sejak awal, bahkan sebelum JS jalan */
+@media (orientation:portrait){#rotate{display:flex}.stage{visibility:hidden;pointer-events:none}}
+#rotate p b{color:var(--rose)}
+@media (prefers-reduced-motion:reduce){.scr.on>*,#next,#bem{animation:none!important}}
